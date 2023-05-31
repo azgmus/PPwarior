@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://hm4jb50x6c04"]
+
+[ext_resource type="Script" path="res://scripts/damagers/projectile2.gd" id="1_ahy6v"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8bygs"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rms2u"]
+
+[node name="Area3D" type="Area3D"]
+script = ExtResource("1_ahy6v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_8bygs")
+skeleton = NodePath("../../StaticBody3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_rms2u")

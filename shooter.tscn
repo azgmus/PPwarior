@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6vyyd72q4x6f"]
+
+[ext_resource type="Script" path="res://scripts/damagers/shooter.gd" id="1_cjl0c"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_0sxvf"]
+
+[node name="shooter" type="Node3D"]
+script = ExtResource("1_cjl0c")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1.37254e-07, -1, 0, 3.14, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_0sxvf")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

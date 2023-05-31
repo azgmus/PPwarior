@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bovhh2kmigr1t"]
+
+[ext_resource type="Script" path="res://scripts/damagers/projectile.gd" id="1_u0kq2"]
+[ext_resource type="PackedScene" uid="uid://hm4jb50x6c04" path="res://projectile2.tscn" id="2_mtv33"]
+
+[node name="Projectile" type="Node3D"]
+script = ExtResource("1_u0kq2")
+
+[node name="Area3D" parent="." instance=ExtResource("2_mtv33")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.981784, 0)
+script = null
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+visible = false
