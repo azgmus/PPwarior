@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var projectile = preload("res://projectile2.tscn")
+@onready var projectile = preload("res://projectile.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
