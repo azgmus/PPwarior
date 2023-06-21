@@ -1,10 +1,11 @@
 extends CharacterBody3D
 
-
-
+var SPEED = 10
+var direction = Vector3.FORWARD
 var health = 100
 
-
+var player
+var direction_to_player
 var colors = [Color.DARK_RED, Color.BLACK, Color.DEEP_PINK]
 
 
@@ -15,6 +16,11 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 
 func _ready():
+	get_player()
+	if player:
+		player.connect("test", on_test)
+		print("%s set player(%s)"%[self.name, player.name])
+	velocity.x = SPEED
 	health_label.text = str(health)
 	
 	
@@ -24,6 +30,17 @@ func _ready():
 
 func _physics_process(delta):
 	#rotation.y = rotation.y + .008
+	
+	#direction = direction.rotated(Vector3.UP,.03)
+	#rotate(Vector3.UP,.1)
+	direction_to_player
+	if player:
+		#look_at(player.position)
+		pass
+		
+	
+	#velocity = direction
+	#move_and_slide()
 	pass
 	
 	
@@ -34,9 +51,10 @@ func _physics_process(delta):
 
 
 #rotate on spacebar
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("jump"):
+		#print(self.position)
+		#print(self.global_position)
 		pass
-		#update_health(health - 10)
 	
 
 
@@ -68,9 +86,9 @@ func _on_input_event(camera, event, mouse_position_on_surface, normal, shape_idx
 	if mouse_position_on_surface:
 		pass
 			
-	if Input.is_action_pressed("left_click"):
-		position.x = mouse_position_on_surface.x
-		position.z = mouse_position_on_surface.z
+	
+		
+		
 		
 		#print(event)
 		#print(camera)
@@ -90,3 +108,21 @@ func _on_mouse_entered():
 func _on_mouse_exited():
 	shape.albedo_color = colors[0]
 	
+	
+	
+func set_player(sended_player):
+	if not sended_player:
+		print("no player sent")
+	player = sended_player
+	
+func get_player():
+	
+	get_tree().call_group("player", "send_reference", self)
+
+
+func _on_timer_timeout():
+	velocity.x *= -1
+
+func on_test(textik):
+	health_label.text = textik
+	print("%s got on_test signal"%[name])

@@ -13,3 +13,4 @@ func _process(delta):
 	#print(player.global_transform.origin)
 	#
 	#look_at(player.global_transform.origin)
+	pass

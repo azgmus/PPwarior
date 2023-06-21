@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://dmgjiu0cex0ci"]
 
 [ext_resource type="Texture2D" uid="uid://bvart65dld0qo" path="res://PNG/Dark/texture_04.png" id="1_h3bgx"]
-[ext_resource type="PackedScene" uid="uid://vnapxnoxrtfk" path="res://character_body_3d.tscn" id="2_xmr7x"]
 [ext_resource type="PackedScene" uid="uid://c6vyyd72q4x6f" path="res://shooter.tscn" id="5_aw5vo"]
 [ext_resource type="PackedScene" uid="uid://c6nq8o7ngpxi3" path="res://projectile.tscn" id="5_vgn7m"]
+[ext_resource type="PackedScene" uid="uid://vnapxnoxrtfk" path="res://player.tscn" id="6_dk5u3"]
 [ext_resource type="PackedScene" uid="uid://b4wtnwp8xmd8b" path="res://Enemy.tscn" id="6_km7w8"]
 [ext_resource type="PackedScene" uid="uid://i70vya4k82p3" path="res://enemy_sphere.tscn" id="6_ryhn8"]
 
@@ -15,10 +15,6 @@ albedo_texture = ExtResource("1_h3bgx")
 uv1_triplanar = true
 
 [node name="world" type="Node3D"]
-
-[node name="CharacterBody3D" parent="." instance=ExtResource("2_xmr7x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.55005, 2.20981, 4.63787)
-collision_mask = 9
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, 0)
@@ -45,22 +41,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99652, 2.32017, 4.02953)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, -4)
 
 [node name="Enemy" parent="." instance=ExtResource("6_km7w8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.74094, 2.15282, -6.96776)
-
-[node name="Enemy2" parent="." instance=ExtResource("6_km7w8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.03834, 1.81077, -3.03535)
-
-[node name="Enemy3" parent="." instance=ExtResource("6_km7w8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3158, 1, -4.16971)
-
-[node name="Enemy4" parent="." instance=ExtResource("6_km7w8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5098, 1, -5.86214)
-
-[node name="Enemy5" parent="." instance=ExtResource("6_km7w8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5791, 1, -7.29878)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.188478, 0.982077, 0, -0.982077, -0.188478, 0.66831, 21.4319, -4.77312)
+transform = Transform3D(1, 0, 0, 0, -0.188478, 0.982077, 0, -0.982077, -0.188478, 0.66831, 85.4684, -4.77312)
 
 [node name="EnemySphere" parent="." instance=ExtResource("6_ryhn8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.26, 2.10799, 0.864724)
+
+[node name="player" parent="." instance=ExtResource("6_dk5u3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.562554, 0, 1.53375)

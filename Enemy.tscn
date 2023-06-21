@@ -9,7 +9,7 @@ albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_48vc3"]
 
-[node name="Enemy" type="CharacterBody3D"]
+[node name="Enemy" type="CharacterBody3D" groups=["enemy"]]
 script = ExtResource("1_3d0qm")
 
 [node name="plaseholder" type="MeshInstance3D" parent="."]
@@ -20,10 +20,14 @@ surface_material_override/0 = SubResource("StandardMaterial3D_4uvmh")
 shape = SubResource("BoxShape3D_48vc3")
 
 [node name="health_label" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15286, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 4)
 billboard = 1
 text = "health"
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

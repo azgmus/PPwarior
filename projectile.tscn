@@ -21,7 +21,7 @@ shape = SubResource("SphereShape3D_5pjjw")
 mesh = SubResource("SphereMesh_y2xgw")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.32505, 0, 0, 0, 0.32505, 0, 0, 0, 1.25577, 0, 0, 1)
+transform = Transform3D(0.32505, 0, 0, 0, 0.32505, 0, 0, 0, 1.25577, 0, 0, -0.850922)
 mesh = SubResource("BoxMesh_frgt2")
 
 [node name="Hitbox" type="Area3D" parent="MeshInstance3D2"]

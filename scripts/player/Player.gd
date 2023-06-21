@@ -1,10 +1,10 @@
 extends CharacterBody3D
 
-
+signal test
 var health = 100
 
 
-const SPEED = 10.0
+const SPEED = 1000.0
 const JUMP_VELOCITY = 4.5
 
 var direction = Vector3.ZERO
@@ -12,7 +12,7 @@ var weight = 100 # пока ничего не делает, план импле�
 
 @onready var model = $player_model
 @onready var model_anim_player = $player_model/AnimationPlayer
-@onready var raycast = $RayCast3D
+
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -21,7 +21,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 func _ready():
 
 	pass
-
+	
 
 func _physics_process(delta):
 	
@@ -40,17 +40,17 @@ func _physics_process(delta):
 	
 	direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = direction.x * SPEED * delta
+		velocity.z = direction.z * SPEED * delta
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 
 	#model.look_at(transform.origin - velocity, Vector3.UP)
-	
-	#model.look_at(get_mouse_position_on_floor(), Vector3.UP)
-	#model.rotation.x = 0
+	if direction != Vector3.ZERO:
+		model.look_at(position + direction, Vector3.UP)
+	model.rotation.x = 0
 	#model.rotation = get_look_direction_normal()
 	
 	#print(get_look_direction_normal())
@@ -70,8 +70,12 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("jump"):
 		var collision = get_collision_on_cursor(1)
+		emit_signal("test","@")#enemy listening
+		
 		if collision and collision.collider.has_method('take_damage'):
 			target_atack(collision.collider)
+			
+			
 		#print(get_collision_on_cursor(1))
 		
 		
@@ -123,7 +127,7 @@ func get_collision_on_cursor(layer):
 	var rayArray = spaceState.intersect_ray(rayParams)
 	
 	
-	print(rayArray)
+	#print(rayArray)
 	return rayArray
 
 
@@ -150,7 +154,7 @@ func stick_to_target(target):
 	
 func get_mouse_position_on_floor():
 
-	var floor_collision = get_collision_on_cursor(8)
+	var floor_collision = get_collision_on_cursor(8) 
 	
 	
 	if floor_collision.has("position"):
@@ -160,4 +164,5 @@ func get_mouse_position_on_floor():
 	
 	
 	
-
+func send_reference(asker):#кто то зовет этот метод через группу player
+	asker.set_player(self)
