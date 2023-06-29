@@ -20,7 +20,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_4uvmh")
 shape = SubResource("BoxShape3D_48vc3")
 
 [node name="health_label" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 billboard = 1
 text = "health"
 

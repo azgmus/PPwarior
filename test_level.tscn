@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dmgjiu0cex0ci"]
+[gd_scene load_steps=10 format=3 uid="uid://dmgjiu0cex0ci"]
 
 [ext_resource type="Texture2D" uid="uid://bvart65dld0qo" path="res://PNG/Dark/texture_04.png" id="1_h3bgx"]
 [ext_resource type="PackedScene" uid="uid://c6vyyd72q4x6f" path="res://shooter.tscn" id="5_aw5vo"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://vnapxnoxrtfk" path="res://player.tscn" id="6_dk5u3"]
 [ext_resource type="PackedScene" uid="uid://b4wtnwp8xmd8b" path="res://Enemy.tscn" id="6_km7w8"]
 [ext_resource type="PackedScene" uid="uid://i70vya4k82p3" path="res://enemy_sphere.tscn" id="6_ryhn8"]
+[ext_resource type="PackedScene" uid="uid://cjhdwca135sep" path="res://мусор/shaderthing.tscn" id="7_47gil"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2dqre"]
 size = Vector3(1000, 1, 1000)
@@ -41,12 +42,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99652, 2.32017, 4.02953)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, -4)
 
 [node name="Enemy" parent="." instance=ExtResource("6_km7w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4156, 0.555596, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.188478, 0.982077, 0, -0.982077, -0.188478, 0.66831, 85.4684, -4.77312)
 
 [node name="EnemySphere" parent="." instance=ExtResource("6_ryhn8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.26, 2.10799, 0.864724)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5808, 0.559393, 2.78776)
 
 [node name="player" parent="." instance=ExtResource("6_dk5u3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.562554, 0, 1.53375)
+
+[node name="shaderthing" parent="." instance=ExtResource("7_47gil")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27209, 1.30532, 0.567261)

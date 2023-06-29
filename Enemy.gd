@@ -35,7 +35,7 @@ func _physics_process(delta):
 	#rotate(Vector3.UP,.1)
 	direction_to_player
 	if player:
-		#look_at(player.position)
+		
 		pass
 		
 	
@@ -123,6 +123,6 @@ func get_player():
 func _on_timer_timeout():
 	velocity.x *= -1
 
-func on_test(textik):
-	health_label.text = textik
+func on_test():
+	
 	print("%s got on_test signal"%[name])

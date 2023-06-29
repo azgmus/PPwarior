@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://kvl1kjdd4qg4"]
+
+[ext_resource type="Script" path="res://skill.gd" id="1_hmx0d"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_n72ht"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_i7fs8"]
+
+[node name="skill" type="Node3D"]
+script = ExtResource("1_hmx0d")
+
+[node name="distance_visualizer" type="Node3D" parent="."]
+
+[node name="target" type="MeshInstance3D" parent="distance_visualizer"]
+mesh = SubResource("SphereMesh_n72ht")
+
+[node name="reachable_target" type="MeshInstance3D" parent="distance_visualizer"]
+mesh = SubResource("BoxMesh_i7fs8")

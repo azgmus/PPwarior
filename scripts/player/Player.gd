@@ -70,7 +70,7 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("jump"):
 		var collision = get_collision_on_cursor(1)
-		emit_signal("test","@")#enemy listening
+		emit_signal("test")#enemy listening
 		
 		if collision and collision.collider.has_method('take_damage'):
 			target_atack(collision.collider)
@@ -102,7 +102,7 @@ func get_look_direction_normal():
 
 
 func get_normal_to_target(target):
-	var target_position = target.position 
+	var target_position = target.global_position
 	target_position.y = 0
 	var normal_to_target = (target_position - position).normalized()
 	normal_to_target = Vector3(normal_to_target.x, 0, normal_to_target.z) #changing y causes normal to go up and down
@@ -163,6 +163,11 @@ func get_mouse_position_on_floor():
 	return Vector3()
 	
 	
+
+
+func get_attack_point():  #возвращает поинт на  земле, потом будут расчеты основанные на дальности, типе скилла и тд
 	
+	return get_mouse_position_on_floor()
+
 func send_reference(asker):#кто то зовет этот метод через группу player
 	asker.set_player(self)
