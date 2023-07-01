@@ -126,3 +126,8 @@ func _on_timer_timeout():
 func on_test():
 	
 	print("%s got on_test signal"%[name])
+
+
+func _on_area_3d_area_entered(area):
+	take_damage(10)
+	print(area)

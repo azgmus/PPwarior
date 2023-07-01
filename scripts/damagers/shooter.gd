@@ -20,7 +20,7 @@ func _on_timer_timeout():
 		var projectile_instance = projectile.instantiate()
 		projectile_instance.rotation = rotation
 		projectile_instance.position = position
-		get_parent().add_child(projectile_instance)
+		get_tree().root.get_child(0).add_child(projectile_instance)
 	
 	
 	

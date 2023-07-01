@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4wtnwp8xmd8b"]
+[gd_scene load_steps=6 format=3 uid="uid://b4wtnwp8xmd8b"]
 
 [ext_resource type="Script" path="res://Enemy.gd" id="1_3d0qm"]
 
@@ -8,6 +8,8 @@
 albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_48vc3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3dgck"]
 
 [node name="Enemy" type="CharacterBody3D" groups=["enemy"]]
 script = ExtResource("1_3d0qm")
@@ -27,7 +29,13 @@ text = "health"
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_3dgck")
+
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]

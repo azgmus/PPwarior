@@ -11,7 +11,7 @@ script = ExtResource("1_hmx0d")
 
 [node name="distance_visualizer" type="Node3D" parent="."]
 
-[node name="target" type="MeshInstance3D" parent="distance_visualizer"]
+[node name="cursor" type="MeshInstance3D" parent="distance_visualizer"]
 mesh = SubResource("SphereMesh_n72ht")
 
 [node name="reachable_target" type="MeshInstance3D" parent="distance_visualizer"]

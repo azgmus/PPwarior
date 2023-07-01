@@ -8,6 +8,7 @@ const SPEED = 1000.0
 const JUMP_VELOCITY = 4.5
 
 var direction = Vector3.ZERO
+var mouse_position = Vector3.ZERO
 var weight = 100 # пока ничего не делает, план имплементировать приоритет и силу кто кого толкает при столкновении
 
 @onready var model = $player_model
@@ -24,7 +25,7 @@ func _ready():
 	
 
 func _physics_process(delta):
-	
+	mouse_position = get_mouse_position_on_floor()
 	
 	# Add the gravity.
 	if not is_on_floor():
@@ -96,7 +97,7 @@ func _physics_process(delta):
 
 
 func get_look_direction_normal():
-	var normal_to_cursor = (get_mouse_position_on_floor() - position).normalized()
+	var normal_to_cursor = (mouse_position - position).normalized()
 	var loock_direction_normal = Vector3(normal_to_cursor.x, 0, normal_to_cursor.z) #changing y causes normal to go up and down
 	return loock_direction_normal
 
