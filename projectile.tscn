@@ -22,6 +22,7 @@ mesh = SubResource("SphereMesh_y2xgw")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.32505, 0, 0, 0, 0.32505, 0, 0, 0, 1.25577, 0, 0, -0.850922)
+visible = false
 mesh = SubResource("BoxMesh_frgt2")
 
 [node name="Hitbox" type="Area3D" parent="MeshInstance3D2"]
@@ -29,5 +30,10 @@ mesh = SubResource("BoxMesh_frgt2")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/Hitbox"]
 shape = SubResource("BoxShape3D_2yuhw")
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 9.41
+autostart = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="MeshInstance3D2/Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -4,7 +4,9 @@ signal test
 var health = 100
 
 
-const SPEED = 1000.0
+var SPEED = 10.0
+const acceleration = .05
+const decceleration = .05
 const JUMP_VELOCITY = 4.5
 
 var direction = Vector3.ZERO
@@ -13,7 +15,7 @@ var weight = 100 # пока ничего не делает, план импле�
 
 @onready var model = $player_model
 @onready var model_anim_player = $player_model/AnimationPlayer
-
+@onready var loock_ray = $RayCast3D
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -39,19 +41,39 @@ func _physics_process(delta):
 	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	input_dir = input_dir.rotated(-0.785398)
 	
-	direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
-		velocity.x = direction.x * SPEED * delta
-		velocity.z = direction.z * SPEED * delta
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+	direction = (Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	
+	acceleration
+	var a
+	var b
+	#if signf(a) != signf or a > 0 and b < 0:
 
-
+	
+	movement3(delta)
+	
+	
+	
+	
+	
+	
+	
+	
 	#model.look_at(transform.origin - velocity, Vector3.UP)
-	if direction != Vector3.ZERO:
-		model.look_at(position + direction, Vector3.UP)
+	if Input.is_action_just_pressed("left_click"):
+		SPEED = 4
+	if Input.is_action_just_released("left_click"):
+		SPEED = 10
+	
+	
+	if Input.is_action_pressed("left_click"):
+		model.look_at(get_mouse_position_on_floor(), Vector3.UP)
+		loock_ray.target_position = get_look_direction_normal() * 5
+	else:
+		if direction != Vector3.ZERO:
+			model.look_at(position + direction, Vector3.UP)
+			loock_ray.target_position = direction * 5
 	model.rotation.x = 0
+	print(get_mouse_position_on_floor())
 	#model.rotation = get_look_direction_normal()
 	
 	#print(get_look_direction_normal())
@@ -94,6 +116,81 @@ func _physics_process(delta):
 	move_and_slide()
 
 	set_process_unhandled_input(true)
+
+
+func movement1():
+	if direction.x and !(direction.x < 0 and velocity.x > 0 or direction.x > 0 and velocity.x < 0) :
+		velocity.x = lerp(velocity.x, SPEED * direction.x, acceleration)
+		
+	else:
+		velocity.x = lerp(velocity.x, 0.0, decceleration)
+		
+	if direction.z and !(direction.z < 0 and velocity.z > 0 or direction.z > 0 and velocity.z < 0):
+		
+		velocity.z = lerp(velocity.z, SPEED * direction.z, acceleration)
+	else:
+		
+		velocity.z = lerp(velocity.z, 0.0, decceleration)
+	if velocity.z == 0:
+		print("penis")
+	
+	
+	if abs(velocity.z) < .5:
+		velocity.z = 0
+	if abs(velocity.x) < .5:
+		velocity.x = 0
+	print(velocity)
+	print(direction)
+	
+	
+	
+	
+	#______________________________________________________________________________
+	
+	
+	
+	
+func movement2():
+	if direction.x and (signf(velocity.x) == signf(direction.x) or velocity.x == 0) :
+		velocity.x = lerp(velocity.x, SPEED * direction.x, acceleration)
+		
+		
+	else:
+		if !direction.x:
+			
+			velocity.x = lerp(velocity.x, 0.0, decceleration)
+		else:
+			velocity.x = lerp(velocity.x, 0.0, decceleration )
+		
+	if direction.z and (signf(velocity.z) == signf(direction.z) or velocity.z == 0):
+		
+		velocity.z = lerp(velocity.z, SPEED * direction.z, acceleration)
+	else:
+		if !direction.z:
+			
+			velocity.z = lerp(velocity.z, 0.0, decceleration)
+		else:
+			velocity.z = lerp(velocity.z, 0.0, decceleration )
+	
+	if abs(velocity.z) < 0.1:
+		velocity.z = 0
+	if abs(velocity.x) < 0.1:
+		velocity.x = 0
+	print(velocity)
+	
+
+
+func movement3(delta):
+	
+	#var tween = get_tree().create_tween()
+	#tween.set_ease(Tween.EASE_IN_OUT)
+	#tween.set_trans(Tween.TRANS_EXPO)
+	#tween.tween_property(self, "velocity", SPEED * direction, .1)
+	print(velocity)
+	#if direction:  
+	velocity = lerp(velocity, direction * SPEED, .2) 
+		
+
 
 
 func get_look_direction_normal():
@@ -159,7 +256,10 @@ func get_mouse_position_on_floor():
 	
 	
 	if floor_collision.has("position"):
-		return floor_collision["position"]
+		var result = floor_collision["position"]
+		result.y = 0
+		
+		return result
 		
 	return Vector3()
 	

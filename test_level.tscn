@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dmgjiu0cex0ci"]
+[gd_scene load_steps=11 format=3 uid="uid://dmgjiu0cex0ci"]
 
 [ext_resource type="Texture2D" uid="uid://bvart65dld0qo" path="res://PNG/Dark/texture_04.png" id="1_h3bgx"]
 [ext_resource type="PackedScene" uid="uid://c6vyyd72q4x6f" path="res://shooter.tscn" id="5_aw5vo"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b4wtnwp8xmd8b" path="res://Enemy.tscn" id="6_km7w8"]
 [ext_resource type="PackedScene" uid="uid://i70vya4k82p3" path="res://enemy_sphere.tscn" id="6_ryhn8"]
 [ext_resource type="PackedScene" uid="uid://cjhdwca135sep" path="res://мусор/shaderthing.tscn" id="7_47gil"]
+[ext_resource type="PackedScene" uid="uid://ddatx01tvy25c" path="res://мусор/fps.tscn" id="8_k3klf"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2dqre"]
 size = Vector3(1000, 1, 1000)
@@ -36,10 +37,7 @@ transform = Transform3D(1, 0, 0, 0, -0.905961, 0.423362, 0, -0.423362, -0.905961
 shadow_enabled = true
 
 [node name="Projectile2" parent="." instance=ExtResource("5_vgn7m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99652, 2.32017, 4.02953)
-
-[node name="shooter" parent="." instance=ExtResource("5_aw5vo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, -4)
+transform = Transform3D(1.096, 0, 0, 0, 1.096, 0, 0, 0, 1.096, 1.99652, 2.32017, 4.02953)
 
 [node name="Enemy" parent="." instance=ExtResource("6_km7w8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4156, 0.555596, 0)
@@ -51,7 +49,12 @@ transform = Transform3D(1, 0, 0, 0, -0.188478, 0.982077, 0, -0.982077, -0.188478
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5808, 0.559393, 2.78776)
 
 [node name="player" parent="." instance=ExtResource("6_dk5u3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.562554, 0, 1.53375)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.562554, 0.397665, 1.53375)
+
+[node name="shooter" parent="player" instance=ExtResource("5_aw5vo")]
+visible = false
 
 [node name="shaderthing" parent="." instance=ExtResource("7_47gil")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27209, 1.30532, 0.567261)
+
+[node name="Control" parent="." instance=ExtResource("8_k3klf")]

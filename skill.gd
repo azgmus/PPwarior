@@ -32,10 +32,13 @@ func _process(delta):
 		
 		
 		cursor.global_position = skill_user.get_attack_point()
+		
 		if Vector3.ZERO.distance_to(cursor.position) > distance:
 			reachable_target.position = skill_user.get_normal_to_target(cursor) * distance
 		else:
-			reachable_target.position = cursor.position
+			reachable_target.global_position = cursor.global_position
+		
+		
 			
 			
 			
@@ -49,9 +52,10 @@ func _process(delta):
 			
 			
 		var projectile_instance = projectile.instantiate()
+		get_tree().root.get_child(0).add_child(projectile_instance)
 		projectile_instance.rotation = rotation
 		projectile_instance.global_position = reachable_target.global_position
-		get_tree().root.get_child(0).add_child(projectile_instance)
+		
 	
 	
 
