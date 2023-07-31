@@ -27,7 +27,7 @@ func _process(delta):
 	
 	if Input.is_action_pressed("left_click"):
 		
-		rotate(Vector3.UP, .004)
+		pass
 	
 	
 	
@@ -38,12 +38,12 @@ func delete():
 
 
 func _on_hitbox_body_entered(body):
-	print('penis entered')
+	print(name + 'hitbox body entered')
 	delete()
 
 
 func _on_body_entered(body):
-	print('penis entered')
+	print(name + 'body entered')
 	delete()
 	
 func set_player(sended_player):

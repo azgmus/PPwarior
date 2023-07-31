@@ -1,14 +1,17 @@
 extends Node3D
 
-var radius = Vector3.ONE * 2
+@onready var animation_player = $AnimationPlayer
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
-
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if scale < radius:
-		scale += Vector3.ONE * .1
-	else:
-		queue_free()
+	pass
+
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "stager":
+		animation_player.play("walk")

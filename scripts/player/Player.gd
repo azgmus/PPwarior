@@ -60,7 +60,7 @@ func _physics_process(delta):
 	
 	#model.look_at(transform.origin - velocity, Vector3.UP)
 	if Input.is_action_just_pressed("left_click"):
-		SPEED = 4
+		SPEED = 6
 	if Input.is_action_just_released("left_click"):
 		SPEED = 10
 	
@@ -73,7 +73,7 @@ func _physics_process(delta):
 			model.look_at(position + direction, Vector3.UP)
 			loock_ray.target_position = direction * 5
 	model.rotation.x = 0
-	print(get_mouse_position_on_floor())
+	
 	#model.rotation = get_look_direction_normal()
 	
 	#print(get_look_direction_normal())
@@ -131,16 +131,14 @@ func movement1():
 	else:
 		
 		velocity.z = lerp(velocity.z, 0.0, decceleration)
-	if velocity.z == 0:
-		print("penis")
+	
 	
 	
 	if abs(velocity.z) < .5:
 		velocity.z = 0
 	if abs(velocity.x) < .5:
 		velocity.x = 0
-	print(velocity)
-	print(direction)
+	
 	
 	
 	
@@ -176,7 +174,7 @@ func movement2():
 		velocity.z = 0
 	if abs(velocity.x) < 0.1:
 		velocity.x = 0
-	print(velocity)
+	
 	
 
 
@@ -186,7 +184,7 @@ func movement3(delta):
 	#tween.set_ease(Tween.EASE_IN_OUT)
 	#tween.set_trans(Tween.TRANS_EXPO)
 	#tween.tween_property(self, "velocity", SPEED * direction, .1)
-	print(velocity)
+	
 	#if direction:  
 	velocity = lerp(velocity, direction * SPEED, .2) 
 		

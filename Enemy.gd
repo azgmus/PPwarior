@@ -10,30 +10,33 @@ var colors = [Color.DARK_RED, Color.BLACK, Color.DEEP_PINK]
 
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-@onready var shape = $plaseholder.get("surface_material_override/0").duplicate()
+
 
 @onready var health_label = $health_label
-
+@onready var model = $dummyModel2
 
 func _ready():
 	get_player()
 	if player:
 		player.connect("test", on_test)
 		print("%s set player(%s)"%[self.name, player.name])
-	velocity.x = SPEED
+	
 	health_label.text = str(health)
 	
 	
 	
-	$plaseholder.set("surface_material_override/0", shape)
+	
 	pass 
 
 func _physics_process(delta):
-	#rotation.y = rotation.y + .008
-	
+	velocity = -global_transform.basis.z * .1
+	velocity.y = -3
+	move_and_slide()
+	look_at(player.position)
+	rotation.x = 0
 	#direction = direction.rotated(Vector3.UP,.03)
 	#rotate(Vector3.UP,.1)
-	direction_to_player
+
 	if player:
 		
 		pass
@@ -77,7 +80,9 @@ func update_health(new_health):
 
 
 func take_damage(damage):
+	model.animation_player.play("stager")
 	update_health(health - damage)
+	
 	
 func _on_input_event(camera, event, mouse_position_on_surface, normal, shape_idx):
 	
@@ -97,20 +102,20 @@ func _on_input_event(camera, event, mouse_position_on_surface, normal, shape_idx
 
 
 func get_mash():
-	return $plaseholder
+	return $dummyModel2
 
 func _on_mouse_entered():
 	
-	shape.albedo_color = colors[1]
+	pass
 	
 
 
 func _on_mouse_exited():
-	shape.albedo_color = colors[0]
+	pass
 	
 	
 	
-func set_player(sended_player):
+func set_player(sended_player): #вызывает игрок присылает ссылку на себя
 	if not sended_player:
 		print("no player sent")
 	player = sended_player
@@ -121,7 +126,7 @@ func get_player():
 
 
 func _on_timer_timeout():
-	velocity.x *= -1
+	pass
 
 func on_test():
 	
@@ -130,4 +135,4 @@ func on_test():
 
 func _on_area_3d_area_entered(area):
 	take_damage(10)
-	print(area)
+	print("area %s entered in %s" % [area.name, self.name])
